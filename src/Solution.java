@@ -1,21 +1,32 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.LinkedHashMap; // Use LinkedHashMap for order
+import java.util.Map;
 
-public class Solution {
+public class Solution{
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         
-        // TODO: Read a single line of text
+        if (!sc.hasNextLine()) return;
+        String input = sc.nextLine();
         
-        // TODO: Split the text into individual words
+        // Split input into words
+        String[] words = input.split("\\s+");
         
-        // TODO: Create a HashMap to store the frequency of each word
+        // LinkedHashMap maintains the order in which keys are first added
+        LinkedHashMap<String, Integer> wordCountMap = new LinkedHashMap<>();
         
-        // TODO: Iterate through the words and update their frequencies in the map
+        for (String word : words) {
+            // Check if word is empty (to handle leading/trailing spaces)
+            if (word.isEmpty()) continue;
+            
+            wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
+        }
         
-        // TODO: Iterate through the map and print the unique words and their counts
-        // Format: "word: count"
+        // Print results
+        for (Map.Entry<String, Integer> entry : wordCountMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
         
+        sc.close();
     }
 }
