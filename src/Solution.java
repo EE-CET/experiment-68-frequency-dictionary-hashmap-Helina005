@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.LinkedHashMap; // Use LinkedHashMap for order
 import java.util.Map;
 
-public class Main {
+public class Solution{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
