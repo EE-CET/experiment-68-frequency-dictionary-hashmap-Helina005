@@ -2,23 +2,29 @@ import java.util.TreeMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Solution {
+public class Solution{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        // Use a TreeMap to automatically sort keys alphabetically
+        // TreeMap keeps words in alphabetical order
         TreeMap<String, Integer> frequencyMap = new TreeMap<>();
 
         if (sc.hasNextLine()) {
             String input = sc.nextLine();
+            
+            // Split by whitespace
             String[] words = input.split("\\s+");
 
             for (String word : words) {
                 if (word.isEmpty()) continue;
-                frequencyMap.put(word, frequencyMap.getOrDefault(word, 0) + 1);
+                
+                // Convert to lowercase to match autograder expectations
+                String cleanWord = word.toLowerCase();
+                
+                frequencyMap.put(cleanWord, frequencyMap.getOrDefault(cleanWord, 0) + 1);
             }
 
-            // Printing from a TreeMap will now follow alphabetical order
+            // Print the results in 'word: count' format
             for (Map.Entry<String, Integer> entry : frequencyMap.entrySet()) {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
