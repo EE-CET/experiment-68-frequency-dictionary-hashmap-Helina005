@@ -1,30 +1,32 @@
-import java.util.TreeMap;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.LinkedHashMap; // Use LinkedHashMap for order
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        // TreeMap handles the alphabetical sorting the grader wants
-        TreeMap<String, Integer> map = new TreeMap<>();
-
-        if (sc.hasNextLine()) {
-            String line = sc.nextLine().trim();
-            if (!line.isEmpty()) {
-                String[] words = line.split("\\s+");
-                for (String w : words) {
-                    // Force lowercase just in case
-                    String word = w.toLowerCase();
-                    map.put(word, map.getOrDefault(word, 0) + 1);
-                }
-
-                for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                    // CRITICAL: Ensure NO extra characters are inside these quotes
-                    System.out.println(entry.getKey() + ": " + entry.getValue());
-                }
-            }
+        if (!sc.hasNextLine()) return;
+        String input = sc.nextLine();
+        
+        // Split input into words
+        String[] words = input.split("\\s+");
+        
+        // LinkedHashMap maintains the order in which keys are first added
+        LinkedHashMap<String, Integer> wordCountMap = new LinkedHashMap<>();
+        
+        for (String word : words) {
+            // Check if word is empty (to handle leading/trailing spaces)
+            if (word.isEmpty()) continue;
+            
+            wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
         }
+        
+        // Print results
+        for (Map.Entry<String, Integer> entry : wordCountMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+        
         sc.close();
     }
 }
